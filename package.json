@@ -1,7 +1,7 @@
 {
   "name": "justreq",
   "version": "0.1.1",
-  "description": "永不离线的测试接口服务，摆脱测试机离线之痛",
+  "description": "Never offline test api server",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -12,5 +12,10 @@
   "bugs": {
     "url": "https://github.com/vilien/justreq/issues"
   },
-  "homepage": "https://github.com/vilien/justreq#readme"
+  "homepage": "https://github.com/vilien/justreq#readme",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "crypt": "0.0.2",
+    "md5": "^2.2.1"
+  }
 }

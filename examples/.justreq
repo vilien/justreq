@@ -1,0 +1,17 @@
+{
+  "host":           "127.0.0.1",
+  "port":           81,
+  "cacheTime":      "20m",
+  "cachePath":      ".jr/cache/",
+  "substitutePath": ".jr/subs/",
+  "jrPort":         8000,
+  "proxyTimeout":   "1s",
+  "rules": [
+    {
+      "href":       "user.html",
+      "subs":       "user.jrs",
+      "ignoreArgs": "",
+      "noCache":    false
+    }
+  ]
+}
