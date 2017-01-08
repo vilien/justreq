@@ -1,0 +1,29 @@
+[
+  {
+    "userId" : 1001,
+    "name" : "Lily",
+    "age" : 21,
+    "sex"  : "female",
+    "weight" : "53",
+    "height" : "170",
+    "bio": "Hi, my name is Lily. I'm a sunny girl."
+  },
+  {
+    "userId" : 1002,
+    "name" : "Lucy",
+    "age" : 20,
+    "sex"  : "female",
+    "weight" : "50",
+    "height" : "166",
+    "bio": "I'm Lucy. I like swimming and running."
+  },
+  {
+    "userId" : 1003,
+    "name" : "Bruce",
+    "age" : 22,
+    "sex"  : "male",
+    "weight" : "76",
+    "height" : "180",
+    "bio": "Hnmm, what do you want to know?"
+  }
+]

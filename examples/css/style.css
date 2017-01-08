@@ -1,0 +1,18 @@
+body{
+  margin:0;
+  padding: 15px;
+}
+
+pre{
+  padding:10px;
+  background-color:#ccc;
+}
+
+.tips{
+  color:#666;
+  font-style: italic;
+}
+
+.bio{
+  vertical-align: top;
+}

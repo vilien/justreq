@@ -1,17 +1,28 @@
 {
-  "host":           "127.0.0.1",
-  "port":           81,
-  "cacheTime":      "20m",
-  "cachePath":      ".jr/cache/",
+  "host": "localhost",
+  "port": 80,
+  "cacheTime": "20m",
+  "cachePath": ".jr/cache/",
   "substitutePath": ".jr/subs/",
-  "jrPort":         8000,
-  "proxyTimeout":   "1s",
+  "tempPath": ".jr/tmp/",
+  "jrPort": 8000,
+  "proxyTimeout": "6s",
   "rules": [
     {
-      "href":       "user.html",
-      "subs":       "user.jrs",
-      "ignoreArgs": "",
-      "noCache":    false
+      "href" : "api/users.do",
+      "subs" : "jrs/users.jrs"
+    },
+    {
+      "href" : "api/save-user.do",
+      "subs" : "jrs/save-user.jrs"
+    },
+    {
+      "href" : "api/post.do",
+      "subs" : "api/post.json"
+    },
+    {
+      "href" : "api/user.do",
+      "subs" : "api/user.json"
     }
   ]
 }

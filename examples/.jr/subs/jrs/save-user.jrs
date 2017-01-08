@@ -1,0 +1,23 @@
+'use strict';
+
+const path = require('path');
+const fs = require('fs');
+const dataFile = path.resolve('./data/users.json');
+const data = fs.readFileSync(dataFile);
+const users = JSON.parse(data);
+
+let newUsers = users.map(function(user){
+  if (user.userId == $_GET['userId']) {
+    return Object.assign({}, user, $_POST);
+  } else {
+    return user;
+  }
+});
+
+fs.writeFile(dataFile, JSON.stringify(newUsers, null, 2));
+
+echo({
+  code : 0,
+  data : newUsers 
+});
+end(); // 结束脚本

@@ -1,0 +1,28 @@
+'use strict';
+
+const path = require('path');
+const fs = require('fs');
+const dataFile = path.resolve('./data/users.json');
+const data = fs.readFileSync(dataFile);
+const users = JSON.parse(data);
+
+function getUser(id) {
+  let user = {};
+  users.forEach(function(item){
+    if (item.userId == id) {
+      user = item;
+    }
+  });
+  return user;
+}
+
+let user = getUser($_GET['userId']);
+
+setCookie('userId', user.userId);
+setCookie('userName', user.name);
+
+echo({
+  code : 0,
+  data : user
+});
+end(); // 结束脚本

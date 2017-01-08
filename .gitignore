@@ -1,5 +1,8 @@
 # Dependency directories
 node_modules
 
-examples
+examples/.jr/cache
+examples/.jr/tmp
+examples/.jr/*-map.json
+
 *.log

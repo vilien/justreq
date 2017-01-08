@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JRS-demo</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="javascript/zepto.min.js"></script>
+</head>
+<body>
+<h1>用JRS脚本替代接口</h1>
+<hr>
+<h2>GET请求</h2>
+<p>选择用户：
+  <select id="selectedUserId">
+    <option value="1001">Lily</option>
+    <option value="1002">Lucy</option>
+    <option value="1003">Bruce</option>
+  </select>
+  <input onclick="getUserInfo()" type="button" value="获取用户信息">
+</p>
+<p>用户ID：<span id="userId"></span></p>
+<p>用户名：<span id="name"></span></p>
+<p>年　龄：<span id="age"></span></p>
+<p>性　别：<span id="sex"></span></p>
+<p>体　重：<span id="weight"></span></p>
+<p>身　高：<span id="height"></span></p>
+<p>简　介：<span id="bio"></span></p>
+<hr>
+<h2>POST请求</h2>
+<p>请选择：<select id="editUserInfo">
+    <option value="" selected="selected">-- User Name --</option>
+    <option value="1001">Lily</option>
+    <option value="1002">Lucy</option>
+    <option value="1003">Bruce</option>
+  </select></p>
+<p>用户名：<input name="name" type="text"></p>
+<p>年　龄：<input name="age" type="text"></p>
+<p>性　别：<input name="sex" type="text"></p>
+<p>体　重：<input name="weight" type="text"></p>
+<p>身　高：<input name="height" type="text"></p>
+<p><span class="bio">简　介：</span><textarea name="bio" cols="100" rows="5"></textarea></p>
+<p><input onclick="submitMessage()" type="button" value="提交"></p>
+<hr>
+<h2>怎么做到的呢？</h2>
+<p>你只要在.justreq文件添加如下规则，并编写相应的users.jrs、save-user.jrs文件即可</p>
+<pre>
+{
+  ...
+  "rules": [
+    {
+      "href" : "api/users.do",
+      "subs" : "jrs/users.jrs"
+    },
+    {
+      "href" : "api/save-user.do",
+      "subs" : "jrs/save-user.jrs"
+    }
+  ]
+}
+</pre>
+<p class="tips">本示例所使用jrs文件位于“.jr/subs/jrs/”</p>
+
+<script>
+function getUserInfo(){
+  var id = $('#selectedUserId').val();
+  $.get('http://127.0.0.1:8000/api/users.do?userId=' + id, function(res){
+    var user = res.data;
+    $('#userId').text(user.userId);
+    $('#name').text(user.name);
+    $('#age').text(user.age);
+    $('#sex').text(user.sex);
+    $('#weight').text(user.weight);
+    $('#height').text(user.height);
+    $('#bio').text(user.bio);
+  });
+}
+
+$('#editUserInfo').on('change', function(e){
+  var id = $(e.currentTarget).val();
+  $.get('http://127.0.0.1:8000/api/users.do?userId=' + id, function(res){
+    var user = res.data;
+    $('input[name="name"]').val(user.name);
+    $('input[name="age"]').val(user.age);
+    $('input[name="sex"]').val(user.sex);
+    $('input[name="weight"]').val(user.weight);
+    $('input[name="height"]').val(user.height);
+    $('textarea[name="bio"]').val(user.bio);
+  });
+});
+
+function submitMessage(){
+  var id = $('#editUserInfo').val();
+  var data = {id : id};
+  if (!id) {
+    alert('Please select a user');
+    return;
+  }
+  data.name = $('input[name="name"]').val();
+  data.age = $('input[name="age"]').val();
+  data.sex = $('input[name="sex"]').val();
+  data.weight = $('input[name="weight"]').val();
+  data.height = $('input[name="height"]').val();
+  data.bio = $('textarea[name="bio"]').val();
+  $.post('http://127.0.0.1:8000/api/save-user.do?userId=' + id, data, function(res){
+    console.log(res);
+    alert('Success! Try to press "F5" to reload this page');
+  });
+}
+</script>
+</body>
+</html>

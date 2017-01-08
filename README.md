@@ -7,6 +7,7 @@
 * api替身服务，当后台GG们还没开发好接口时，可以用json、txt等替代
 * 独有JRS脚本，仿php，可以定制更灵活的api替身，甚至可以用来开发小型站点
 * 支持ES6、ES7，开发更高效
+* 支持CROS跨域，前端开发也可以放心使用
 
 ## 安装
 首先下载安装[Node.js](https://nodejs.org/en/)，然后运行以下命令安装justreq命令行工具
@@ -26,12 +27,17 @@ justreq init
 配置完成后，将在当前目录生成“.justreq”文件，你可以随时按自己需求进行配置
 
 ## 使用
-运行以下命令即可启动justreq
+运行以下命令启动justreq
 ```
 justreq start
 ```
-
-如果需要在启动的同时，更新缓存，可以用以下命令
+然后把你的接口地址直接指向justreq服务（JR Server），例如：
+```javascript
+const API_HOST = "127.0.0.1:8000";
+$.get('http://' + API_HOST + "/getInfo.do?userId=1001", func);
+```
+ 
+如果需要在启动的同时更新缓存，可以用以下命令
 ```
 justreq start -c
 ```
@@ -64,7 +70,7 @@ end();
 除了你所熟知的javascript对象外，我们新增加了一些必要的全局函数、属性
 #### 属性
 |   name   |  description  
-|----------|----------------------------------------
+|----------|:-----------------------------------------------------
 | $_GET    | 获取querystring
 | $_POST   | 获取POST方式提交的表单数据
 | $_COOKIE | 获取cookies
@@ -74,7 +80,7 @@ end();
 
 #### 方法
 |   name                 |  description  
-|------------------------|---------------------------------------
+|------------------------|:---------------------------------------
 | echo(string)           | 向页面输出字符串
 | end([string])          | 结束当前脚本，输出字符串为可选参数。***注：请务必使用该方法结束脚本，否则脚本将运行至超时***
 | sendFile(filepath)     | 也可直接使用文件做为输出。使用该方法时，不必再使用`end()`结束脚本
@@ -85,7 +91,40 @@ end();
 由于***jrs***脚本完全基于js，并运行于Node.js环境，因此，你可以使用Node.js下面的一切优秀模块来进行开发。
 并且，只要你的Node.js版本支持，你也可以使用ES6/ES7来编写***jrs***
 
-## more
+### RULES配置
+为了更好的发挥justreq的功能，我们提供了一些配置规则
+
+|    name    |  description  
+|------------|:-----------------------------------------------------
+| href       | 目标路径，必填。可以使用正则表达式
+| ignoreArgs | 可忽略字段，以逗号分割，可以忽略一些非关键字段。例如跳过常见的防缓存的`?v=1483884433384`，则设置 `{"ignoreArgs" : "v"}`
+| noCache    | 不允许缓存该目标，缺省值为允许
+| subs       | 目标替身，推荐使用我们的jrs脚本，也可以是json、txt
+
+以下是一份样例：
+
+```json
+// .justreq
+{
+    ...
+  "rules": [
+    {
+      "href":       "user.do",
+      "subs":       "user.jrs"
+    },
+    {
+      "href":       "login.do",
+      "noCache":    true
+    },
+    {
+      "href":       "getGoodsInfo.do",
+      "ignoreArgs": "v,token,timestamp"
+    }
+  ]
+}
+```
+
+## 相关
 [justreq](https://github.com/vilien/justreq)  - github
 
 [issue](https://github.com/vilien/justreq/issues)

@@ -1,0 +1,8 @@
+{
+  "name" : "Lily",
+  "age"  : 21,
+  "sex"  : "female",
+  "weight" : "53",
+  "height" : "170",
+  "bio": "Hi, my name is Lily. I'm a sunny girl."
+}
