@@ -55,8 +55,11 @@ function getUserBio(){
   });
 }
 function submitMessage(){
-  $.post('http://127.0.0.1:8000/api/post.do', function(data){
-    if (data.ok) {
+  var data = {
+    message: $('#message').val()
+  };
+  $.post('http://127.0.0.1:8000/api/post.do', data, function(res){
+    if (res.ok) {
       alert('Submit success!');
     } else {
       alert('Submit failed!');

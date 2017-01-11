@@ -4,7 +4,6 @@
   "cacheTime": "20m",
   "cachePath": ".jr/cache/",
   "substitutePath": ".jr/subs/",
-  "tempPath": ".jr/tmp/",
   "jrPort": 8000,
   "proxyTimeout": "6s",
   "rules": [

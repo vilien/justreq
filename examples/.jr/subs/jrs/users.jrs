@@ -17,9 +17,10 @@ function getUser(id) {
 }
 
 let user = getUser($_GET['userId']);
+let cookieExpires = (+new Date()) + 7200000;
 
-setCookie('userId', user.userId);
-setCookie('userName', user.name);
+setCookie('userId', user.userId, cookieExpires);
+setCookie('userName', user.name, cookieExpires);
 
 echo({
   code : 0,
