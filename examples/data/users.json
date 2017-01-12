@@ -22,10 +22,11 @@
   {
     "userId": 1003,
     "name": "Bruce",
-    "age": 22,
+    "age": "22",
     "sex": "male",
     "weight": "76",
     "height": "180",
-    "bio": "Hnmm, what do you want to know?"
+    "bio": "Hnmm, what do you want to know?",
+    "id": "1003"
   }
 ]
