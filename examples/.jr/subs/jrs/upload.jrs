@@ -1,0 +1,25 @@
+'use strict';
+
+const fs = require('fs');
+
+setMime('html');
+
+let html = '', title = $_POST['title'], desc = $_POST['desc'], filename = $_FILES['image'].name,
+  filetype = $_FILES['image'].type, filepath = $_FILES['image'].path, filebase64;
+
+
+try {
+  filebase64 = fs.readFileSync(filepath).toString('base64');
+} catch (err) {}
+
+
+html += '<html><body>';
+html += `<p>TITLE: ${title}</p>`;
+html += `<p>NAME: ${filename}</p>`;
+html += `<p>TYPE: ${filetype}</p>`;
+html += `<p>DESCRIPTION: ${desc}</p>`;
+html += `<p><img src="data:${filetype};base64,${filebase64}" width="400" /></p>`;
+html += '<p><input type="button" value="go back" onclick="history.back()" /></p>';
+html += '</body></html>';
+
+end(html); // 结束脚本

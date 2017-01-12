@@ -34,6 +34,7 @@ justreq start
 ```
 然后把你的接口地址直接指向justreq服务（JR Server），例如：
 ```javascript
+// const API_HOST = "https://test.youhost.com";
 const API_HOST = "http://127.0.0.1:8000";
 $.get(API_HOST + "/getInfo.do?userId=1001", func);
 ```
@@ -99,10 +100,10 @@ end();
 
 |    name    |  description  
 |------------|:-----------------------------------------------------
-| href       | 目标路径，必填。可以使用正则表达式
+| href       | 接口路径，必填。可以使用正则表达式
 | ignoreArgs | 可忽略字段，以逗号分割，可以忽略一些非关键字段。例如跳过常见的防缓存的`?v=1483884433384`，则设置 `{"ignoreArgs" : "v"}`
-| noCache    | 不允许缓存该目标，缺省值为允许
-| subs       | 目标替身，推荐使用我们的jrs脚本，也可以是json、txt
+| noCache    | 不允许缓存该接口，缺省值为允许
+| subs       | 接口替身，推荐使用我们的jrs脚本，也可以是json、txt
 
 以下是一份样例：
 
@@ -132,21 +133,26 @@ end();
 ### 其它配置项
 |    name        |  description  
 |----------------|:-----------------------------------------------------
-| host           | 必须。将要代理的服务器主机名
-| port           | 可选。将要代理的服务器端口，默认80
+| host           | 必须。将要代理的接口服务器主机名
+| port           | 可选。将要代理的接口服务器端口，默认80。（如设为443，并且没有配置proxyHttps选项，将自动切换为https方式连接接口服务器）
 | cacheTime      | 可选。多久更新缓存，默认20分钟
 | cachePath      | 可选。缓存存放路径，默认.jr/cache
 | substitutePath | 可选。替身文件存放路径，默认.jr/subs
 | jrPort         | 可选。JR Server服务端口，默认8000
 | proxyTimeout   | 可选。请求接口超时时间，默认6秒
 | proxyHttps     | 可选。所请求的接口是否https，可选值为：auto、yes、no。默认auto（检测port是否443）。
-| ssl_ca         | 可选。如果是https，并且需要数字证书，可使用该选项指定ca.pem存放地址
-| ssl_key        | 可选。如果是https，并且需要数字证书，可使用该选项指定key.pem存放地址
-| ssl_cert       | 可选。如果是https，并且需要需要数字证书，可使用该选项指定cert.pem存放地址
+| ssl_ca         | 可选。如果接口是https，并且需要数字证书，可使用该选项指定ca.pem存放地址
+| ssl_key        | 可选。如果接口是https，并且需要数字证书，可使用该选项指定key.pem存放地址
+| ssl_cert       | 可选。如果接口是https，并且需要数字证书，可使用该选项指定cert.pem存放地址
 | onCors         | 可选。是否开启cors跨域，可选值为：yes、no，默认yes
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
 ## ChangeLog
+
+### 2017-1-12
+#### v0.2.2
+* 添加jrs处理文件上传的demo
+* 修复因网络延迟造成丢包的bug
 
 ### 2017-1-11
 #### v0.2.1

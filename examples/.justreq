@@ -16,6 +16,10 @@
       "subs" : "jrs/save-user.jrs"
     },
     {
+      "href" : "api/upload.do",
+      "subs" : "jrs/upload.jrs"
+    },
+    {
       "href" : "api/post.do",
       "subs" : "api/post.json"
     },

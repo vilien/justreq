@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>upload-demo</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="javascript/zepto.min.js"></script>
+</head>
+<body>
+<h1>用JRS脚本替代接口处理文件上传</h1>
+<hr>
+<form method="POST" action="http://127.0.0.1:8000/api/upload.do" enctype="multipart/form-data">
+  <p>标题：<input name="title" type="text" style="width:300px" value="A picture"></p>
+  <p>标题：<input name="title" type="text" style="width:300px" value="A picture"></p>
+  <p>图片：<input name="image" type="file" accept="image/*"></p>
+  <p><span class="bio">描述：</span><textarea name="desc" cols="100" rows="5">Add a picture to demonstrate</textarea></p>
+  <p><input type="submit" value="提交"></p>
+</form>
+<hr>
+<h2>怎么做到的呢？</h2>
+<p>你只要在.justreq文件添加如下规则，并编写相应的users.jrs、save-user.jrs文件即可</p>
+<pre>
+{
+  ...
+  "rules": [
+    {
+      "href" : "api/upload.do",
+      "subs" : "jrs/upload.jrs"
+    }
+  ]
+}
+</pre>
+<p class="tips">本示例所使用jrs文件位于“.jr/subs/jrs/”</p>
+</body>
+</html>
