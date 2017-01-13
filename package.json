@@ -1,6 +1,6 @@
 {
   "name": "justreq",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Never offline test api server",
   "main": "index.js",
   "repository": {
@@ -15,8 +15,7 @@
   "homepage": "https://github.com/vilien/justreq#readme",
   "dependencies": {
     "colors": "^1.1.2",
-    "crypt": "0.0.2",
-    "formidable": "^1.0.17",
-    "md5": "^2.2.1"
+    "fecha": "^2.3.0",
+    "formidable": "^1.0.17"
   }
 }
