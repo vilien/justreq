@@ -11,12 +11,12 @@
   },
   {
     "userId": 1002,
-    "name": "Lucy1",
-    "age": "201",
-    "sex": "female1",
-    "weight": "501",
-    "height": "1661",
-    "bio": "I'm Lucy. I like swimming and running.1",
+    "name": "Lucy",
+    "age": "20",
+    "sex": "female",
+    "weight": "50",
+    "height": "166",
+    "bio": "I'm Lucy. I like swimming and running.",
     "id": "1002"
   },
   {

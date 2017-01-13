@@ -1,111 +1,112 @@
 # justreq(JR Server)
-永不离线的测试接口服务，摆脱测试接口离线之痛
+A caching proxy server for testing interface of HTTP or HTTPS. A never offline testing interface server. It can help us to develop offline. It's especially useful for Front-End developers.
 
-## 特性
+## Features
+* Each request will be cached. Tt can make us be absorbed in develop whether online or offline. 
+* Substitution of interface. We can use other file to substitute interface, such as JSON, TXT and so on.
+* The JRS script as PHP. It can customize more flexible interface, and even develop a site.
+* Support for ES6, ES7, can develop more efficient.
+* Support for CORS(Cross-Origin Resource Sharing), so it can work for Web Front-End.
 
-* 自动缓存每一次接口请求，当测试服务器宕机时，依然可以从容开发
-* 接口替身服务，当后台GG们还没开发好接口时，可以用json、txt等替代
-* 独有jrs脚本，仿php，可以定制更灵活的接口替身，甚至可以用来开发小型站点
-* 支持ES6、ES7，开发更高效
-* 支持CORS跨域，前端开发也可以放心使用
-* 支持https，无论接口采用http还是https，都能从容应对
-
-## 安装
-首先下载安装[Node.js](https://nodejs.org/en/)，然后运行以下命令安装justreq命令行工具
+## Install
+Install [Node.js](https://nodejs.org/en/) first, then run this for install CLI of JUSTREQ
 ```
 npm install -g justreq-cli
 ```
-运行以下命令安装主程序
+
+Install main program using:
 ```
 npm install justreq
 ```
 
-## 初始化
-运行以下命令进行初始化
+## Initialization
+To create a configuration file using:
 ```
 justreq init
 ```
-配置完成后，将在当前目录生成“.justreq”文件，你可以随时按自己需求进行配置
+After finished, the file ".justreq" will be created at working directory. We can modify it any time.
 
-## 使用
-运行以下命令启动justreq
+## Usage
+To start a JR Server using:
 ```
 justreq start
 ```
-然后把你的接口地址直接指向justreq服务（JR Server），例如：
+
+Then modify our testing interface to JR Server, eg.
 ```javascript
-// const API_HOST = "https://test.youhost.com";
+// const API_HOST = "https://test.werhost.com";
 const API_HOST = "http://127.0.0.1:8000";
-$.get(API_HOST + "/getInfo.do?userId=1001", func);
+$.get(API_HOST + "/getInfo.do?userId=1001", callback);
 ```
+
+******
  
-如果需要在启动的同时更新缓存，可以用以下命令
+Also, we can run this to clean caches and start JR server
 ```
 justreq start -c
 ```
 
-如果接口地址临时改动了，而你又不想修改配置文件，可以用以下命令
+Or, run this to temporarily proxy other remote not in configuration file
 ```
-justreq start -h temp.yourhost.com
+justreq start -h temp.werhost.com
 ```
 
-可运行如下命令查看更多命令行参数
+We can run this to get help
 ```
 justreq start --help
 ```
 
-## 进阶玩法
-### JRS脚本
-接下来要郑重推荐我们独创的***jrs***脚本了。该脚本基于javascript，因此你完全不需要任何学习成本即可上手。先来一段：
+## Advancement
+### JR Script
+Now, I will introduce our ***jrs***. It's Javascript-based, so we can use it without study any more. Let me show:
 ```javascript
 // getUser.jrs
 var userId = $_GET['userId'];
 var users = {
-    1001 : {name:'zhangsan', age: 22},
-    1002 : {name:'lily', age: 21}
+    1001 : {name:'Bruce', age: 22},
+    1002 : {name:'Lily', age: 21}
 };
 var user = users[userId];
 setCookie('userName', user.name);
 echo(JSON.stringify(user));
 end();
 ```
-除了你所熟知的javascript对象外，我们新增加了一些必要的全局函数、属性
-#### 属性
+We added some necessary global function and properties, except usual of JS.
+#### Properties
 |   name   |  description  
 |----------|:-----------------------------------------------------
-| $_GET    | 获取querystring
-| $_POST   | 获取POST方式提交的表单数据
-| $_COOKIE | 获取cookies
-| $_HEADER | 获取header
-| $_FILES  | 获取表单上传的文件。注意，如需要上传文件，须将form编码方式设置为enctype="multipart/form-data"
+| $_GET    | An associative object of variables passed to the current script via the URL parameters.
+| $_POST   | An associative object of variables passed to the current script via the HTTP POST method
+| $_COOKIE | An associative object of variables passed to the current script via HTTP Cookies.
+| $_HEADER | An associative object of variables passed to the current script via HTTP headers
+| $_FILES  | An associative object of items uploaded to the current script via the HTTP POST method when using multipart/form-data as the HTTP Content-Type in the request.
 
-#### 方法
+#### Functions
 |   name                 |  description  
 |------------------------|:---------------------------------------
-| echo(string)           | 向页面输出字符串
-| end([string])          | 结束当前脚本，输出字符串为可选参数。***注：请务必使用该方法结束脚本，否则脚本将运行至超时***
-| sendFile(filepath)     | 也可直接使用文件做为输出。使用该方法时，不必再使用`end()`结束脚本
-| setMime(suffix)        | 设置当前输出的mimetype；缺省将尝试json，如自动检测不通过，将切换为txt。可选值为：txt、html、css、xml、json、js、jpg、jpeg、gif、png、svg。如需设置其它类型，可直接使用setHeader函数设置“Content-Type”
-| setCookie(name, value) | 设置输出的cookies。完整参数：setCookie(name, value [, expires [, path [, domain [, secure [, httponly]]]]])
-| setHeader(name, value) | 设置header，其中'Server'、'Date'由JR Server自动设置，不允许修改
+| echo(string)           | Output one string.
+| end([string])          | To end the current script and output one string. ***Tips. we must always use this function to finish our script, or it will run until timeout.***
+| sendFile(filepath)     | Output an file and end the script. Using this, we don't have to use "end()".
+| setMime(suffix)        | Modify mimetype of current script. By default, try using "json", switch to "txt" when failure. Options: txt, html, css, xml, json, js, jpg, jpeg, gif, png, svg. Also, we can use "setHeader()" to customize "Content-Type".
+| setCookie(name, value) | Send a cookie. usage: setCookie(name, value [, expires [, path [, domain [, secure [, httponly]]]]])
+| setHeader(name, value) | Send a HTTP header. But, it can't be sent about "Server" and "Date", they are automatic by JR Server.
 
-由于***jrs***脚本完全基于js，并运行于Node.js环境，因此，你可以使用Node.js下面的一切优秀模块来进行开发。
-并且，只要你的Node.js版本支持，你也可以使用ES6/ES7来编写***jrs***
+For ***jrs***, we can use every modules from Node.js, because it run in Node.js runtime environment.
+And, we can code with ES6, ES7 also, if Node.js enough new.
 
 *********
 
-<a id="rules"></a>
-### RULES配置
-为了更好的发挥justreq的功能，我们提供了一些配置规则
+### Rules
+For some special interface, we can rule it using:
 
 |    name    |  description  
 |------------|:-----------------------------------------------------
-| href       | 接口路径，必填。可以使用正则表达式
-| ignoreArgs | 可忽略字段，以逗号分割，可以忽略一些非关键字段。例如跳过常见的防缓存的`?v=1483884433384`，则设置 `{"ignoreArgs" : "v"}`
-| noCache    | 不允许缓存该接口，缺省值为允许
-| subs       | 接口替身，推荐使用我们的jrs脚本，也可以是json、txt
+| href       | The path of URL, not null. Support for RegExp.
+| ignoreArgs | Some fields can be ignored, such as version stamp "?v=1483884433384", we can using: `{"ignoreArgs" : "v"}`
+| noCache    | Not allow caching. Default is allowed.
+| subs       | Substitution's path. Suggest to use our ***jrs***, or "json", "txt" and so on.
 
-以下是一份样例：
+Example:
 
 ```json
 // .justreq
@@ -130,62 +131,65 @@ end();
 
 *********
 
-### 其它配置项
+### Configurations
 |    name        |  description  
 |----------------|:-----------------------------------------------------
-| host           | 必须。将要代理的接口服务器主机名
-| port           | 可选。将要代理的接口服务器端口，默认80。（如设为443，并且没有配置proxyHttps选项，将自动切换为https方式连接接口服务器）
-| cacheTime      | 可选。多久更新缓存，默认20分钟
-| cachePath      | 可选。缓存存放路径，默认.jr/cache
-| substitutePath | 可选。替身文件存放路径，默认.jr/subs
-| jrPort         | 可选。JR Server服务端口，默认8000
-| proxyTimeout   | 可选。请求接口超时时间，默认6秒
-| proxyHttps     | 可选。所请求的接口是否https，可选值为：auto、yes、no。默认auto（检测port是否443）。
-| ssl_ca         | 可选。如果接口是https，并且需要数字证书，可使用该选项指定ca.pem存放地址
-| ssl_key        | 可选。如果接口是https，并且需要数字证书，可使用该选项指定key.pem存放地址
-| ssl_cert       | 可选。如果接口是https，并且需要数字证书，可使用该选项指定cert.pem存放地址
-| onCors         | 可选。是否开启cors跨域，可选值为：yes、no，默认yes
-| rules          | 可选。参照[RULES配置](#user-content-rules)
+| host           | Not null, the hostname of remote interface server.
+| port           | Optional, the port of remote interface server, default is 80. (Connet interface with HTTPS, if it's 443)
+| cacheTime      | Optional, the time of caches update. value in "h", "m", "s". Default is "20m".
+| cachePath      | Optional, cache files directory, default is ".jr/cache".
+| substitutePath | Optional, substitution files directory, default is ".jr/subs".
+| jrPort         | Optional, the port of JR server, default is 8000.
+| proxyTimeout   | Optional, the timeout of proxy, value in "h", "m", "s", default is "6s".
+| proxyHttps     | Optional, whether interface server is running on HTTPS or not. Options: "auto", "yes", "no". Default is "auto".
+| ssl_ca         | Optional, CA(Certificate Authority) path, if interface server is running on HTTPS and need it.
+| ssl_key        | Optional, the path of private key to use for SSL, if interface server is running on HTTPS and need it.
+| ssl_cert       | Optional, the path of public x509 certificate to use, if interface server is running on HTTPS and need it.
+| onCors         | Optional, on CORS(Cross-Origin Resource Sharing)? Options: "yes", "no". Default is "yes".
+| rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
 
 ### 2017-1-13
+#### v0.2.5
+* Add english "README.md" and examples
+
 #### v0.2.4
-* 日志信息显示优化
-* 去除已弃用依赖
+* Optimized log printing. 
+* Removed unusual dependencies.
 
 ### 2017-1-12
 #### v0.2.3
-* 修复替身文件读取时异常退出的bug
+* Fixed an exception about read substitution file.
 
 #### v0.2.2
-* 添加jrs处理文件上传的demo
-* 修复因网络延迟造成丢包的bug
+* Add a demo about upload file of jrs
+* Packet less fixed
 
 ### 2017-1-11
 #### v0.2.1
-* 使用http模块及pipe重构server.js
-* 使用https模块实现https代理支持
-* 使用pipe重构proxy.js
-* 使用formidable重构jrs.js
-* 错误处理优化，添加jrs脚本400错误处理
-* 添加cors配置选项
+* Refactor "server.js" using modules of HTTP and "pipe"
+* Refactor "proxy.js" using "pipe".
+* Refactor "jrs.js" using "formidable".
+* Support for HTTPS using HTTPS module.
+* Add error page of HTTP status 400.
+* Add configuration of CORS.
 
 ### 2017-1-9
 #### v0.1.3
-* 修复jrs脚本set-cookies不成功的bug
+* A buf of set-cookie fixes.
 
 ### 2017-1-8
 #### v0.1.2
-* 添加cors跨域支持
-* 完善examples
+* Support for CORS
+* Finish examples
 
-## 相关
+## More
 [justreq](https://github.com/vilien/justreq)  - github
 
 [issue](https://github.com/vilien/justreq/issues)
 
 [blog](http://blog.csdn.net/binjly)
 
-## 开源协议
-本项目依据MIT开源协议发布，允许任何组织和个人免费使用。
+## License
+Released under the [MIT license](https://github.com/vilien/justreq/blob/master/MIT-LICENSE)

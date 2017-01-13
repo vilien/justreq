@@ -7,42 +7,42 @@
 <script src="javascript/zepto.min.js"></script>
 </head>
 <body>
-<h1>Substitute Interface Using "JRS"</h1>
+<h1>用JRS脚本替代接口</h1>
 <hr>
-<h2>GET</h2>
-<p>Select a user:
+<h2>GET请求</h2>
+<p>选择用户：
   <select id="selectedUserId">
     <option value="1001">Lily</option>
     <option value="1002">Lucy</option>
     <option value="1003">Bruce</option>
   </select>
-  <input onclick="getUserInfo()" type="button" value="Get user info">
+  <input onclick="getUserInfo()" type="button" value="获取用户信息">
 </p>
-<p>ID: <span id="userId"></span></p>
-<p>Name: <span id="name"></span></p>
-<p>Age: <span id="age"></span></p>
-<p>Sex: <span id="sex"></span></p>
-<p>Weight: <span id="weight"></span></p>
-<p>Height: <span id="height"></span></p>
-<p>Bio: <span id="bio"></span></p>
+<p>用户ID：<span id="userId"></span></p>
+<p>用户名：<span id="name"></span></p>
+<p>年　龄：<span id="age"></span></p>
+<p>性　别：<span id="sex"></span></p>
+<p>体　重：<span id="weight"></span></p>
+<p>身　高：<span id="height"></span></p>
+<p>简　介：<span id="bio"></span></p>
 <hr>
-<h2>POST</h2>
-<p>Select a user: <select id="editUserInfo">
+<h2>POST请求</h2>
+<p>请选择：<select id="editUserInfo">
     <option value="" selected="selected">-- User Name --</option>
     <option value="1001">Lily</option>
     <option value="1002">Lucy</option>
     <option value="1003">Bruce</option>
   </select></p>
-<p>Name: <input name="name" type="text"></p>
-<p>Age: <input name="age" type="text"></p>
-<p>Sex: <input name="sex" type="text"></p>
-<p>Weight: <input name="weight" type="text"></p>
-<p>Height: <input name="height" type="text"></p>
-<p><span class="bio">Bio: </span><textarea name="bio" cols="100" rows="5"></textarea></p>
-<p><input onclick="submitMessage()" type="button" value="Submit"></p>
+<p>用户名：<input name="name" type="text"></p>
+<p>年　龄：<input name="age" type="text"></p>
+<p>性　别：<input name="sex" type="text"></p>
+<p>体　重：<input name="weight" type="text"></p>
+<p>身　高：<input name="height" type="text"></p>
+<p><span class="bio">简　介：</span><textarea name="bio" cols="100" rows="5"></textarea></p>
+<p><input onclick="submitMessage()" type="button" value="提交"></p>
 <hr>
-<h2>How to do this?</h2>
-<p>We just add rules to ".justreq" as follow, and code some files as users.jrs, save-user.jrs</p>
+<h2>怎么做到的呢？</h2>
+<p>你只要在.justreq文件添加如下规则，并编写相应的users.jrs、save-user.jrs文件即可</p>
 <pre>
 {
   ...
@@ -58,7 +58,7 @@
   ]
 }
 </pre>
-<p class="tips">These jrs files of this example are located in ".jr/subs/jrs/"</p>
+<p class="tips">本示例所使用jrs文件位于“.jr/subs/jrs/”</p>
 
 <script>
 function getUserInfo(){

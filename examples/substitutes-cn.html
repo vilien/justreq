@@ -7,20 +7,20 @@
 <script src="javascript/zepto.min.js"></script>
 </head>
 <body>
-<h1>Substitute Interface Using "JSON"</h1>
+<h1>用json文件替代接口</h1>
 <hr>
-<h2>GET</h2>
-<p><input onclick="getUserName()" type="button" value="Get user name"> <span id="username"></span></p>
-<p><input onclick="getUserAge()" type="button" value="Get user age"> <span id="userage"></span></p>
-<p><input onclick="getUserBio()" type="button" value="Get user bio"> <span id="userbio"></span></p>
+<h2>GET请求</h2>
+<p><input onclick="getUserName()" type="button" value="获取用户姓名"> <span id="username"></span></p>
+<p><input onclick="getUserAge()" type="button" value="获取用户年龄"> <span id="userage"></span></p>
+<p><input onclick="getUserBio()" type="button" value="获取用户简介"> <span id="userbio"></span></p>
 <hr>
-<h2>POST</h2>
-<p>Says something:</p>
+<h2>POST请求</h2>
+<p>说点什么吧</p>
 <p><textarea id="message" cols="100" rows="5"></textarea></p>
-<p><input onclick="submitMessage()" type="button" value="Submit"></p>
+<p><input onclick="submitMessage()" type="button" value="提交"></p>
 <hr>
-<h2>How to do this?</h2>
-<p>We just add rules to ".justreq" as follow:</p>
+<h2>怎么做到的呢？</h2>
+<p>你只要在.justreq文件添加如下规则即可</p>
 <pre>
 {
   ...
@@ -36,7 +36,7 @@
   ]
 }
 </pre>
-<p class="tips">These json files of this example are located in ".jr/subs/api/"</p>
+<p class="tips">本示例所使用json文件位于“.jr/subs/api/”</p>
 
 <script>
 function getUserName(){

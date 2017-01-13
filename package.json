@@ -1,6 +1,6 @@
 {
   "name": "justreq",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Never offline test api server",
   "main": "index.js",
   "repository": {
@@ -13,6 +13,13 @@
     "url": "https://github.com/vilien/justreq/issues"
   },
   "homepage": "https://github.com/vilien/justreq#readme",
+  "keywords": [
+    "proxy",
+    "cache",
+    "offline",
+    "http",
+    "https"
+  ],
   "dependencies": {
     "colors": "^1.1.2",
     "fecha": "^2.3.0",
