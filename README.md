@@ -2,14 +2,14 @@
 A caching proxy server for testing interface of HTTP or HTTPS. A never offline testing interface server. It can help us to develop offline. It's especially useful for Front-End developers.
 
 ## Features
-* Each request will be cached. Tt can make us be absorbed in develop whether online or offline. 
+* Each request will be cached. It can make us be absorbed in develop whether online or offline. 
 * Substitution of interface. We can use other file to substitute interface, such as JSON, TXT and so on.
-* The JRS script as PHP. It can customize more flexible interface, and even develop a site.
+* We make an script named JRS, just like PHP. It can customize more flexible interface, and even develop a site.
 * Support for ES6, ES7, can develop more efficient.
 * Support for CORS(Cross-Origin Resource Sharing), so it can work for Web Front-End.
 
 ## Install
-Install [Node.js](https://nodejs.org/en/) first, then run this for install CLI of JUSTREQ
+Install [Node.js](https://nodejs.org/en/) first, then run this to install CLI of JUSTREQ
 ```
 npm install -g justreq-cli
 ```
@@ -72,6 +72,7 @@ echo(JSON.stringify(user));
 end();
 ```
 We added some necessary global function and properties, except usual of JS.
+
 #### Properties
 |   name   |  description  
 |----------|:-----------------------------------------------------
@@ -149,10 +150,14 @@ Example:
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
+### 2017-1-15
+#### v0.2.6
+* Optimized log printing for substitutions
+* Modified some error description in README.md
 
 ### 2017-1-13
 #### v0.2.5
-* Add english "README.md" and examples
+* Added english "README.md" and examples
 
 #### v0.2.4
 * Optimized log printing. 
@@ -163,17 +168,17 @@ Example:
 * Fixed an exception about read substitution file.
 
 #### v0.2.2
-* Add a demo about upload file of jrs
+* Added a demo about upload file of jrs
 * Packet less fixed
 
 ### 2017-1-11
 #### v0.2.1
-* Refactor "server.js" using modules of HTTP and "pipe"
-* Refactor "proxy.js" using "pipe".
-* Refactor "jrs.js" using "formidable".
+* Refactored "server.js" using modules of HTTP and "pipe"
+* Refactored "proxy.js" using "pipe".
+* Refactored "jrs.js" using "formidable".
 * Support for HTTPS using HTTPS module.
-* Add error page of HTTP status 400.
-* Add configuration of CORS.
+* Added error page of HTTP status 400.
+* Added configuration of CORS.
 
 ### 2017-1-9
 #### v0.1.3
@@ -182,14 +187,14 @@ Example:
 ### 2017-1-8
 #### v0.1.2
 * Support for CORS
-* Finish examples
+* Finished examples
 
 ## More
 [justreq](https://github.com/vilien/justreq)  - github
 
 [issue](https://github.com/vilien/justreq/issues)
 
-[blog](http://blog.csdn.net/binjly)
+[blog[CN]](http://blog.csdn.net/binjly/article/details/54238070)
 
 ## License
 Released under the [MIT license](https://github.com/vilien/justreq/blob/master/MIT-LICENSE)
