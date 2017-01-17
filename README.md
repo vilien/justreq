@@ -150,6 +150,11 @@ Example:
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
+### 2017-1-17
+#### v0.2.7
+* Optimized processing logic of CORS
+* Normalized some code
+
 ### 2017-1-15
 #### v0.2.6
 * Optimized log printing for substitutions

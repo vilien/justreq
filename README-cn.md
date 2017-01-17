@@ -150,6 +150,10 @@ end();
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
 ## ChangeLog
+### 2017-1.17
+#### v0.2.7
+* CORS处理逻辑优化
+* 代码规范化
 
 ### 2017-1-15
 #### v0.2.6
