@@ -34,7 +34,7 @@ justreq start
 
 Then modify our testing interface to JR Server, eg.
 ```javascript
-// const API_HOST = "https://test.werhost.com";
+// const API_HOST = "https://test.yourhost.com";
 const API_HOST = "http://127.0.0.1:8000";
 $.get(API_HOST + "/getInfo.do?userId=1001", callback);
 ```
@@ -151,6 +151,9 @@ Example:
 
 ## ChangeLog
 ### 2017-1-17
+#### v0.2.8
+* Optimized cleaning cache logic
+
 #### v0.2.7
 * Optimized processing logic of CORS
 * Normalized some code
