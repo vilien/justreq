@@ -150,6 +150,10 @@ Example:
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
+### 2017-1-19
+#### v0.2.9
+* Fixed a exception about proxy timeout
+
 ### 2017-1-17
 #### v0.2.8
 * Optimized cleaning cache logic
