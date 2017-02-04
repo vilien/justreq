@@ -151,6 +151,9 @@ Example:
 
 ## ChangeLog
 ### 2017-2-4
+#### v0.2.11
+* Support to add 'search' in subs of RULE
+
 #### v0.2.10
 * Support for RegExp replacement
 
