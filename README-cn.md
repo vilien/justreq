@@ -115,8 +115,8 @@ end();
     ...
   "rules": [
     {
-      "href":       "user.do",
-      "subs":       "user.jrs"
+      "href":       "user.do\\?id=(\\d+)",
+      "subs":       "user.jrs?userId=$1"
     },
     {
       "href":       "login.do",
@@ -150,6 +150,10 @@ end();
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-4
+#### v0.2.10
+* 支持正则表达式分组替换功能
+
 ### 2017-1-19
 #### v0.2.9
 * 修复代理超时异常退出的BUG

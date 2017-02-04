@@ -115,8 +115,8 @@ Example:
     ...
   "rules": [
     {
-      "href":       "user.do",
-      "subs":       "user.jrs"
+      "href":       "user.do\\?id=(\\d+)",
+      "subs":       "user.jrs?userId=$1"
     },
     {
       "href":       "login.do",
@@ -150,6 +150,10 @@ Example:
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-4
+#### v0.2.10
+* Support for RegExp replacement
+
 ### 2017-1-19
 #### v0.2.9
 * Fixed a exception about proxy timeout
@@ -205,6 +209,8 @@ Example:
 [justreq](https://github.com/vilien/justreq)  - github
 
 [issue](https://github.com/vilien/justreq/issues)
+
+[Chinese](https://github.com/vilien/justreq/blob/master/README-cn.md)
 
 [blog[CN]](http://blog.csdn.net/binjly/article/details/54238070)
 
