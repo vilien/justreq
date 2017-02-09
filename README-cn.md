@@ -150,6 +150,10 @@ end();
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-9
+#### v0.2.12
+* 修复当提交包含checkbox的表单时异常退出的BUG
+
 ### 2017-2-4
 #### v0.2.11
 * 支持往RULE规则的subs里添加search
