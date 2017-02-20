@@ -150,6 +150,10 @@ Example:
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-20
+#### v0.2.13
+* Removed character '^M' in some files
+
 ### 2017-2-9
 #### v0.2.12
 * Fixed a exception that when submit a form which contain some checkbox

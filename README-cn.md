@@ -150,6 +150,10 @@ end();
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-20
+#### v0.2.13
+* 删除部分文件中的回车符 
+
 ### 2017-2-9
 #### v0.2.12
 * 修复当提交包含checkbox的表单时异常退出的BUG
