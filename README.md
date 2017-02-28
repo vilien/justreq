@@ -1,4 +1,7 @@
 # justreq(JR Server)
+
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![License][license-image]][npm-url]
+
 A caching proxy server for testing interface of HTTP or HTTPS. A never offline testing interface server. It can help us to develop offline. It's especially useful for Front-End developers.
 
 ## Features
@@ -150,6 +153,15 @@ Example:
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-28
+#### v0.3.1
+* refactor some files use ES6
+* fix bug about create new slow map fail
+* optimize proxy pipe
+* add some global property to JRScript
+* add 404 err to JR Server when can't find jrs file
+* fix wrong charaters which create by reduceFormData.js when length below 17
+
 ### 2017-2-20
 #### v0.2.13
 * Removed character '^M' in some files
@@ -187,12 +199,12 @@ Example:
 * Added english "README.md" and examples
 
 #### v0.2.4
-* Optimized log printing. 
-* Removed unusual dependencies.
+* Optimized log printing
+* Removed unusual dependencies
 
 ### 2017-1-12
 #### v0.2.3
-* Fixed an exception about read substitution file.
+* Fixed an exception about read substitution file
 
 #### v0.2.2
 * Added a demo about upload file of jrs
@@ -201,11 +213,11 @@ Example:
 ### 2017-1-11
 #### v0.2.1
 * Refactored "server.js" using modules of HTTP and "pipe"
-* Refactored "proxy.js" using "pipe".
-* Refactored "jrs.js" using "formidable".
-* Support for HTTPS using HTTPS module.
-* Added error page of HTTP status 400.
-* Added configuration of CORS.
+* Refactored "proxy.js" using "pipe"
+* Refactored "jrs.js" using "formidable"
+* Support for HTTPS using HTTPS module
+* Added error page of HTTP status 400
+* Added configuration of CORS
 
 ### 2017-1-9
 #### v0.1.3
@@ -226,4 +238,9 @@ Example:
 [blog[CN]](http://blog.csdn.net/binjly/article/details/54238070)
 
 ## License
-Released under the [MIT license](https://github.com/vilien/justreq/blob/master/MIT-LICENSE)
+Released under the [![MIT license][license-image]](https://github.com/vilien/justreq/blob/master/MIT-LICENSE)
+
+[downloads-image]: https://img.shields.io/npm/dm/justreq.svg
+[license-image]: https://img.shields.io/npm/l/justreq.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/justreq.svg
+[npm-url]: https://www.npmjs.com/package/justreq

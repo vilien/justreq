@@ -1,4 +1,7 @@
 # justreq(JR Server)
+
+[![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![License][license-image]][npm-url]
+
 永不离线的测试接口服务，摆脱测试接口离线之痛
 
 ## 特性
@@ -150,6 +153,15 @@ end();
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
 ## ChangeLog
+### 2017-2-28
+#### v0.3.1
+* 所有非ES6文件重构为ES6格式
+* 修复新建slow map失败的bug
+* 优化proxy管道处理
+* JRScript添加几个常用的全局属性
+* 找不到jrs脚本时，JR Server将报404错误
+* 修复当字符小时17时，reduce计算错误的bug
+
 ### 2017-2-20
 #### v0.2.13
 * 删除部分文件中的回车符 
@@ -225,3 +237,8 @@ end();
 
 ## 开源协议
 本项目依据MIT开源协议发布，允许任何组织和个人免费使用。
+
+[downloads-image]: https://img.shields.io/npm/dm/justreq.svg
+[license-image]: https://img.shields.io/npm/l/justreq.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/justreq.svg
+[npm-url]: https://www.npmjs.com/package/justreq

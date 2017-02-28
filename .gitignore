@@ -1,5 +1,7 @@
 # Dependency directories
 /node_modules
+/coverage
+/tmp
 
 /examples/.jr/cache
 /examples/.jr/*-map.json
