@@ -155,6 +155,26 @@ describe('CacheMap test', function(){
     });
   });
 
+  describe('recheck() test', function(){
+    it('type = 0', function(){
+      let key = md5('GET/getInfo.do?a=1&b=2');
+      let time = 1486187561701;
+      let cacheType = {type: 0, key: 'no_exists_key', time};
+      cacheMap.fastMap = {[key]: time};
+      cacheMap.recheck(cacheType);
+      expect(cacheType).to.be.deep.include({type: 0, time});
+    });
+
+    it('type = 4', function(){
+      let key = md5('GET/getInfo.do?a=1&b=2');
+      let time = 1486187561701;
+      let cacheType = {type: 0, key, time};
+      cacheMap.fastMap = {[key]: time};
+      cacheMap.recheck(cacheType);
+      expect(cacheType).to.be.deep.equal({type: 4, key, time});
+    });
+  });
+
   describe('updateMap() test', function(){
     let tmpPath = './tmp',
       fastMapFile = tmpPath + '/fast-map.json',

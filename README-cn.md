@@ -135,6 +135,68 @@ end();
 
 *********
 
+### Inspector
+有时，我们会遇到一些特殊的情况，需要介入justreq来决定是否缓存该请求。例如接下来的例子，postData被用base64编码了，而里面有一个参数其实是无关紧要的。如果不进行介入处理，justreq将无法自行判断，从而导致缓存了多份“重复”的请求。
+
+#### 示例
+```javascript
+// myInsp.js
+const querystring = require('querystring');
+const crypto = require('crypto');
+const base64 = require('base64-utf8');
+
+function md5(str) {
+  let md5sum = crypto.createHash('md5');
+  md5sum.update(str);
+  str = md5sum.digest('hex');
+  return str;
+}
+
+function insp(req, buf) {
+  let rawData = buf.toString('utf8'); // token=F2F0CF28&encrypt=eyJhcnRpY2xlSWQiOjk5LCJtaXN0IjoiWTJodiJ9
+  let postData = querystring.parse(rawData); // {token:"F2F0CF28", encrypt:"eyJ..."}
+  if (postData.encrypt) {
+    let decodeString = base64.decode(postData.encrypt);
+    let payload = JSON.parse(decodeString); // {"articleId":99,"mist":"Y2hv"}
+    let md5Code = md5(req.method + req.url + payload.articleId);
+    return {needCache: true, cacheId: md5Code}; // need to be cached
+  } else {
+    return null; // inspector should skip this request
+  }
+}
+
+module.exports = insp; // Must be exported it as node module
+```
+然后在.justreq里进行配置
+```json
+{
+  ...
+  "inspector": ".jr/myInsp.js"
+}
+```
+
+#### insp.js格式要求
+```javascript
+/**
+ * @param  {object} req 由客户端请求产生的reqest对象
+ * @param  {buffer} buf 客户端post过来的data
+ * @return {json}       {needCache: <boolean>, cacheId: <md5>} or null
+ */
+function insp(req, buf) {
+  ...
+  return {needCache: <boolean>, cacheId: <md5>};
+}
+module.exports = insp; // 必须导出为node模块
+```
+
+#### 注意
+* 返回的cacheId必须为32位md5编码。建议用`md5(req.method + req.url + bufData)`以避免缓存冲突。
+* 如果insp返回值为null，将会跳过介入该客户端请求，交由justreq决定是否缓存。
+* 为防阻塞http，提高性能，该介入脚本禁止使用异步操作及计时器(setTimeout、setInterval)
+
+
+*********
+
 ### 其它配置项
 |    name        |  description  
 |----------------|:-----------------------------------------------------
@@ -150,9 +212,18 @@ end();
 | ssl_key        | 可选。如果接口是https，并且需要数字证书，可使用该选项指定key.pem存放地址
 | ssl_cert       | 可选。如果接口是https，并且需要数字证书，可使用该选项指定cert.pem存放地址
 | onCors         | 可选。是否开启cors跨域，可选值为：yes、no，默认yes
+| inspector      | 可选。指定自定义监视脚本，用于决定是否缓存请求。该脚本返回值的格式应为`{needCache: <boolean>, cacheId: <md5>}`
 | rules          | 可选。参照[RULES配置](#user-content-rules)
 
+*********
+
+
 ## ChangeLog
+### 2017-3-1
+#### v0.3.2
+* 支持介入脚本，可自定义是否缓存请求
+* 修复一处当代理失败时读取缓存错误的bug
+
 ### 2017-2-28
 #### v0.3.1
 * 所有非ES6文件重构为ES6格式

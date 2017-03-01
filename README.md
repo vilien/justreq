@@ -135,6 +135,67 @@ Example:
 
 *********
 
+### Inspector
+Sometimes, we need another way to decide whether cache the client request or not. Such as follow case. The post data is encode with base64, but a field is insignificant. If we do not intervene to inspect, JUSTREQ will cache repeat.
+
+#### Examples
+```javascript
+// myInsp.js
+const querystring = require('querystring');
+const crypto = require('crypto');
+const base64 = require('base64-utf8');
+
+function md5(str) {
+  let md5sum = crypto.createHash('md5');
+  md5sum.update(str);
+  str = md5sum.digest('hex');
+  return str;
+}
+
+function insp(req, buf) {
+  let rawData = buf.toString('utf8'); // token=F2F0CF28&encrypt=eyJhcnRpY2xlSWQiOjk5LCJtaXN0IjoiWTJodiJ9
+  let postData = querystring.parse(rawData); // {token:"F2F0CF28", encrypt:"eyJ..."}
+  if (postData.encrypt) {
+    let decodeString = base64.decode(postData.encrypt);
+    let payload = JSON.parse(decodeString); // {"articleId":99,"mist":"Y2hv"}
+    let md5Code = md5(req.method + req.url + payload.articleId);
+    return {needCache: true, cacheId: md5Code}; // need to be cached
+  } else {
+    return null; // inspector should skip this request
+  }
+}
+
+module.exports = insp; // Must be exported it as node module
+```
+And add a configurition to ".justreq"
+```json
+{
+  ...
+  "inspector": ".jr/myInsp.js"
+}
+```
+
+#### Standard for "insp.js"
+```javascript
+/**
+ * @param  {object} req The req create by client request
+ * @param  {buffer} buf The data from FormData
+ * @return {json}       {needCache: <boolean>, cacheId: <md5>} or null
+ */
+function insp(req, buf) {
+  ...
+  return {needCache: <boolean>, cacheId: <md5>};
+}
+module.exports = insp; // Must be exported it as node module
+```
+##### Notice:
+* Expect the value of "cacheId" by return as an md5 code. Recommend `md5(req.method + req.url + bufData)`, to avoid conflict from cache.
+* To skip inspect, we can just return null.
+* To avoid http choke, we can't use any asynchronous code and `setTimeout`, `setInterval`.
+
+
+*********
+
 ### Configurations
 |    name        |  description  
 |----------------|:-----------------------------------------------------
@@ -150,9 +211,16 @@ Example:
 | ssl_key        | Optional, the path of private key to use for SSL, if interface server is running on HTTPS and need it.
 | ssl_cert       | Optional, the path of public x509 certificate to use, if interface server is running on HTTPS and need it.
 | onCors         | Optional, on CORS(Cross-Origin Resource Sharing)? Options: "yes", "no". Default is "yes".
+| inspector      | Optional, custom respector script for decide whether cache request or not.<br>Expect the return of script as `{needCache: <boolean>, cacheId: <md5>}`
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
+
 ## ChangeLog
+### 2017-3-1
+#### v0.3.2
+* add inspector to inspect http request customized
+* fix wrong reponse when read cache when failed proxy
+
 ### 2017-2-28
 #### v0.3.1
 * refactor some files use ES6

@@ -51,8 +51,13 @@ describe('Proxy test', function(){
       proxyHttps: 'auto',
       onCors: true,
       cachePath: './tmp/',
-      proxyTimeout: '6s' 
+      proxyTimeout: '6s'
     };
+    try {
+      fs.accessSync('./tmp', fs.F_OK);
+    } catch (e){
+      fs.mkdirSync('./tmp');
+    }
   });
 
   beforeEach(function(){
@@ -134,18 +139,14 @@ describe('Proxy test', function(){
   });
 
   it('timeout test', function(done){
-    let hasDone = false;
     let req = new MyRequest({
       method: 'GET',
       path: '/getInfo.do'
     });
     let res = new MySocket({
       writeHead: function(code, res) {
-        if (!hasDone) {
-          hasDone = true;
-          expect(code).to.be.equal(500);
-          done();
-        }
+        expect(code).to.be.equal(500);
+        done();
       }
     });
     let prx = new proxy(defaultOptions, req, res, {}, cacheFile);

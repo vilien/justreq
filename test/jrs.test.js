@@ -28,11 +28,19 @@ function httpPost(options, data, cb, isMult){
 }
 
 describe('Jrs test', function(){
-  let jrsFile, mitm;
+  let jrsFile, mitm, tmpPath = './tmp';
+
+  before(function(){
+    try {
+      fs.accessSync(tmpPath, fs.F_OK);
+    } catch (e){
+      fs.mkdirSync(tmpPath);
+    }
+  });
 
   beforeEach(function(){
     mitm = Mitm();
-    jrsFile = './tmp/jrs-' + (+new Date) + '.tmp';
+    jrsFile = tmpPath + '/jrs-' + (+new Date) + '.tmp';
   });
 
   afterEach(function(){
