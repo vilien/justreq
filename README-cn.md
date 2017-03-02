@@ -219,6 +219,10 @@ module.exports = insp; // 必须导出为node模块
 
 
 ## ChangeLog
+### 2017-3-2
+#### v0.3.3
+* 修复由于没有配置inspector导致运行JR Server失败的bug
+
 ### 2017-3-1
 #### v0.3.2
 * 支持介入脚本，可自定义是否缓存请求

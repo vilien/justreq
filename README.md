@@ -216,6 +216,10 @@ module.exports = insp; // Must be exported it as node module
 
 
 ## ChangeLog
+### 2017-3-2
+#### v0.3.3
+* fix bug about run JR Server without inspector failed
+
 ### 2017-3-1
 #### v0.3.2
 * add inspector to inspect http request customized
