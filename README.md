@@ -2,14 +2,15 @@
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![License][license-image]][npm-url]
 
-A caching proxy server for testing interface of HTTP or HTTPS. A never offline testing interface server. It can help us to develop offline. It's especially useful for Front-End developers.
+A caching proxy server for testing interface of HTTP or HTTPS. A never offline testing interface server. A mock server. It can help us to develop offline. It's especially useful for Front-End developers.
 
 ## Features
 * Each request will be cached. It can make us be absorbed in develop whether online or offline. 
-* Substitution of interface. We can use other file to substitute interface, such as JSON, TXT and so on.
-* We make an script named JRS, just like PHP. It can customize more flexible interface, and even develop a site.
+* Mock server. We can use other file to mock interface, such as JSON, TXT and so on.
+* We make an script named JRS, just like PHP. It can mock more flexible interface, and even develop a site.
 * Support for ES6, ES7, can develop more efficient.
 * Support for CORS(Cross-Origin Resource Sharing), so it can work for Web Front-End.
+* No invasive codes, do not inject any code to our project.
 
 ## Install
 Install [Node.js](https://nodejs.org/en/) first, then run this to install CLI of JUSTREQ
@@ -95,8 +96,9 @@ We added some necessary global function and properties, except usual of JS.
 | setCookie(name, value) | Send a cookie. usage: setCookie(name, value [, expires [, path [, domain [, secure [, httponly]]]]])
 | setHeader(name, value) | Send a HTTP header. But, it can't be sent about "Server" and "Date", they are automatic by JR Server.
 
-For ***jrs***, we can use every modules from Node.js, because it run in Node.js runtime environment.
+For ***jrs***, we can use any modules from Node.js, because it run in Node.js runtime environment. Such as [Faker.js](https://github.com/marak/Faker.js/), [mockjs](https://github.com/nuysoft/Mock) and so on.
 And, we can code with ES6, ES7 also, if Node.js enough new.
+
 
 *********
 
@@ -214,9 +216,24 @@ module.exports = insp; // Must be exported it as node module
 | inspector      | Optional, custom respector script for decide whether cache request or not.<br>Expect the return of script as `{needCache: <boolean>, cacheId: <md5>}`
 | rules          | Optional, refer to [RULES](#user-content-rules)
 
+*********
+
+## DEMO
+There are some demo in "./examples" directory.
+
+Open the directory and open `run_examples.cmd`(*shell `./run_examples` for Linux*) to start JUSTREQ. Also, we can start JUSTREQ using `justreq start`.
+
+Now, we can open any html files to experience.
+
+[jrs.html](examples/jrs.html), [substitutes.html](examples/substitutes.html), [upload.html](examples/upload.html)
+
+*********
 
 ## ChangeLog
 ### 2017-3-2
+#### v0.3.4
+* modify "readme.md"
+
 #### v0.3.3
 * fix bug about run JR Server without inspector failed
 

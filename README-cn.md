@@ -2,16 +2,17 @@
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![License][license-image]][npm-url]
 
-永不离线的测试接口服务，摆脱测试接口离线之痛
+永不离线的测试接口服务，让开发不再等待。
 
 ## 特性
 
-* 自动缓存每一次接口请求，当测试服务器宕机时，依然可以从容开发
-* 接口替身服务，当后台GG们还没开发好接口时，可以用json、txt等替代
+* 自动缓存每一次接口请求，当接口服务器宕机时，依然可以从容开发
+* 接口替身服务(Mock Server)，当后台GG们还没开发好接口时，可以用json、txt等替代
 * 独有jrs脚本，仿php，可以定制更灵活的接口替身，甚至可以用来开发小型站点
 * 支持ES6、ES7，开发更高效
 * 支持CORS跨域，前端开发也可以放心使用
 * 支持https，无论接口采用http还是https，都能从容应对
+* 零侵入，不需要在项目中植入任何代码
 
 ## 安装
 首先下载安装[Node.js](https://nodejs.org/en/)，然后运行以下命令安装justreq命令行工具
@@ -94,7 +95,7 @@ end();
 | setCookie(name, value) | 设置输出的cookies。完整参数：setCookie(name, value [, expires [, path [, domain [, secure [, httponly]]]]])
 | setHeader(name, value) | 设置header，其中'Server'、'Date'由JR Server自动设置，不允许修改
 
-由于***jrs***脚本完全基于js，并运行于Node.js环境，因此，你可以使用Node.js下面的一切优秀模块来进行开发。
+由于***jrs***脚本完全基于js，并运行于Node.js环境，因此，你可以使用Node.js下面的一切优秀模块来进行开发，例如[Faker.js](https://github.com/marak/Faker.js/), [mockjs](https://github.com/nuysoft/Mock)等等
 并且，只要你的Node.js版本支持，你也可以使用ES6/ES7来编写***jrs***
 
 *********
@@ -217,9 +218,19 @@ module.exports = insp; // 必须导出为node模块
 
 *********
 
+## DEMO
+演示页面在examples目录。
+进入该目录，直接双击`run_examples.cmd`（*linux用户运行`./run_examples`*）启动justreq。也可以在当前目录执行`justreq start`启动。
+OK，一切准备就绪，现在可以打开任意html文件进行体验
+[jrs.html](examples/jrs-cn.html)、[substitutes.html](examples/substitutes-cn.html)、[upload.html](examples/upload-cn.html)
+
+*********
 
 ## ChangeLog
 ### 2017-3-2
+#### v0.3.4
+* 优化文档描述
+
 #### v0.3.3
 * 修复由于没有配置inspector导致运行JR Server失败的bug
 
