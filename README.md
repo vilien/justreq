@@ -230,6 +230,10 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-3-15
+#### v0.3.5
+* fix exception of not allow cache
+
 ### 2017-3-2
 #### v0.3.4
 * modify "readme.md"
