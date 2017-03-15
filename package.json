@@ -15,7 +15,7 @@
   "homepage": "https://github.com/vilien/justreq#readme",
   "keywords": [
     "proxy",
-    "mock-server"
+    "mock-server",
     "cache",
     "offline",
     "http",
