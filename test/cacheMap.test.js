@@ -31,6 +31,12 @@ describe('CacheMap test', function(){
         {
           'href': 'getGoodsInfo.do',
           'ignoreArgs': 'v,token,timestamp'
+        },
+        {
+          'href': 'getOtherHost.do',
+          'host': '202.1.3.5',
+          'port': 81,
+          'keepFresh': true
         }
       ]
     };
@@ -61,6 +67,14 @@ describe('CacheMap test', function(){
         'href': 'getGoodsInfo.do',
         'patt': /getGoodsInfo.do/,
         'ignoreArgs': 'v,token,timestamp',
+        'isJrs': false
+      },
+      {
+        'href': 'getOtherHost.do',
+        'patt': /getOtherHost.do/,
+        'host': '202.1.3.5',
+        'port': 81,
+        'keepFresh': true,
         'isJrs': false
       }
     ];
@@ -151,6 +165,13 @@ describe('CacheMap test', function(){
       let key = md5('GET/getGoodsInfo.do?v=0.1.2&a=2');
       expect(cacheMap.check('GET', '/getGoodsInfo.do?v=0.1.2&a=2', '')).to.be.deep
         .include({type: 6, key: key})
+        .and.have.property('time');
+    });
+
+    it('type = 7', function(){
+      let key = md5('GET/getOtherHost.do?v=0.1.2&a=2');
+      expect(cacheMap.check('GET', '/getOtherHost.do?v=0.1.2&a=2', '')).to.be.deep
+        .include({type: 7, key: key, host: '202.1.3.5', port: 81})
         .and.have.property('time');
     });
   });

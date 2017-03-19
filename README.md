@@ -111,6 +111,9 @@ For some special interface, we can rule it using:
 | ignoreArgs | Some fields can be ignored, such as version stamp "?v=1483884433384", we can using: `{"ignoreArgs" : "v"}`
 | noCache    | Not allow caching. Default is allowed.
 | subs       | Substitution's path. Suggest to use our ***jrs***, or "json", "txt" and so on.
+| keepFresh  | Always use latest response, unless proxy failed.
+| host       | Temporarily replace host.
+| port       | Temporarily replace port.
 
 Example:
 
@@ -230,6 +233,11 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-3-19
+#### v0.3.6
+* support for replace host and port in rules
+* support for keep latest response with cache
+
 ### 2017-3-15
 #### v0.3.5
 * fix exception of not allow cache

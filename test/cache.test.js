@@ -15,13 +15,15 @@ describe('Cache test', function(){
   });
 
   beforeEach(function(){
-    file =  tmpPath + '/cache' + (+new Date) + '.tmp';
+    file =  tmpPath + '/cache' + (+new Date + Math.random()) + '.tmp';
     cache = new Cache(file);
   });
 
   afterEach(function(){
     cache.end();
-    fs.unlinkSync(file);
+    try {
+      fs.unlinkSync(file);
+    } catch (err) {}
   });
 
   it('cache is instanceof Transform', function(){

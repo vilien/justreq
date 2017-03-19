@@ -61,7 +61,7 @@ describe('Proxy test', function(){
   });
 
   beforeEach(function(){
-    cacheFile = 'cache' + (+new Date) + '.tmp';
+    cacheFile = 'cache' + (+new Date + Math.random()) + '.tmp';
     mitm = Mitm();
   });
 
