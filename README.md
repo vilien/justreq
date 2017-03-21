@@ -233,6 +233,10 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-3-22
+#### v0.3.7
+* support for response Binary use echo()
+
 ### 2017-3-19
 #### v0.3.6
 * support for replace host and port in rules
