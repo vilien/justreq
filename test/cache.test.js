@@ -51,6 +51,14 @@ describe('Cache test', function(){
     });
   });
 
+  it('cache.writeHead not on 200 test', function(done){
+    cache.writeHead('1.1', 304, {'Server': 'JRServer'});
+    fs.readFile(file, {encoding: 'utf8'}, function(err, data){
+      expect(data).to.be.equal('');
+      done();
+    });
+  });
+
   it('cache.pipe() test', function(done){
     let read = new Readable({read: function(){
       this.push('All the bright precious things fade so fast.');
@@ -75,6 +83,23 @@ describe('Cache test', function(){
       setTimeout(function(){
         fs.readFile(file, {encoding: 'utf8'}, function(err, data){
           expect(data).to.be.equal(head + 'Time you enjoy wasting, was not wasted.');
+          done();
+        });
+      }, 5);
+    });
+  });
+
+  it('pipe(cache) not on 200 test', function(done){
+    let read = new Readable({read: function(){
+      this.push('Everything comes full circle.');
+      this.push(null);
+    }});
+    cache.writeHead('1.1', 500, {'Server': 'JRServer'});
+    read.pipe(cache);
+    cache.on('finish', function(){
+      setTimeout(function(){
+        fs.readFile(file, {encoding: 'utf8'}, function(err, data){
+          expect(data).to.be.equal('');
           done();
         });
       }, 5);

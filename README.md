@@ -233,6 +233,10 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-3-25
+#### v0.3.8
+* only cache when statusCode is 200
+
 ### 2017-3-22
 #### v0.3.7
 * support for response Binary use echo()

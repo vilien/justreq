@@ -134,6 +134,22 @@ describe('Jrs test', function(){
     });
   });
 
+  it('get & echo(Binary)', function(done){
+    let jrsCode = 'echo(Buffer.from([0x62,0x75,0x66,0x66,0x65,0x72]));end();';
+    mitm.on('request', function(req, res) {
+      res.sendHead = res.writeHead;
+      new Jrs({version: '1.1.1'}, jrsFile, req, res);
+    });
+    fs.writeFileSync(jrsFile, jrsCode);
+    http.get('http://127.0.0.1/abc.jrs?id=1001', function(res){
+      res.setEncoding('utf8');
+      res.on('data', function(data){
+        expect(data).to.be.equal('buffer');
+        done();
+      });
+    });
+  });
+
   it('upload file', function(done){
     let jrsCode = 'echo($_FILES["file"]);end();';
     let fileData = '--AaB03x\r\n';
