@@ -28,7 +28,7 @@ To create a configuration file using:
 ```
 justreq init
 ```
-After finished, the file ".justreq" will be created at working directory. We can modify it any time.
+After finished, the configuration file ".justreq" will be created at working directory. We can modify it any time. And, we can add comment using JavaScript style.
 
 ## Usage
 To start a JR Server using:
@@ -52,7 +52,7 @@ justreq start -c
 
 Or, run this to temporarily proxy other remote not in configuration file
 ```
-justreq start -h temp.werhost.com
+justreq start -h temp.yourhost.com
 ```
 
 We can run this to get help
@@ -117,12 +117,16 @@ For some special interface, we can rule it using:
 
 Example:
 
-```json
+```javascript
 // .justreq
 {
     ...
   "rules": [
-    {
+    { // for default, always try to proxy to keep fresh
+      "href": ".+",
+      "keepFresh": true
+    },
+    { // using RegExp
       "href":       "user.do\\?id=(\\d+)",
       "subs":       "user.jrs?userId=$1"
     },
@@ -133,6 +137,11 @@ Example:
     {
       "href":       "getGoodsInfo.do",
       "ignoreArgs": "v,token,timestamp"
+    },
+    { // all api that include 'system' in url will be proxy to another host
+      "href": "system.+",
+      "host": "192.168.1.188",
+      "port": "8080"
     }
   ]
 }

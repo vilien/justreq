@@ -29,7 +29,7 @@ npm install justreq
 ```
 justreq init
 ```
-初始化完成后，将在当前目录生成“.justreq”文件，你可以随时按自己需求进行配置
+初始化完成后，将在当前目录生成“.justreq”配置文件，你可以随时按自己需求进行配置。另外，也可以添加js风格的注释。
 
 ## 使用
 运行以下命令启动justreq
@@ -116,12 +116,16 @@ end();
 
 以下是一份样例：
 
-```json
+```javascript
 // .justreq
 {
     ...
   "rules": [
-    {
+    { // 总是先尝试代理，失败时才使用缓存
+      "href": ".+",
+      "keepFresh": true
+    },
+    { // 使用正则表达式
       "href":       "user.do\\?id=(\\d+)",
       "subs":       "user.jrs?userId=$1"
     },
@@ -132,6 +136,11 @@ end();
     {
       "href":       "getGoodsInfo.do",
       "ignoreArgs": "v,token,timestamp"
+    },
+    { // 所有url中包含'system'的接口都代理到188机子
+      "href": "system.+",
+      "host": "192.168.1.188",
+      "port": "8080"
     }
   ]
 }
