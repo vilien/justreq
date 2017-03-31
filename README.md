@@ -242,6 +242,10 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-3-31
+#### v0.3.10
+* print friendly error message when start server failed
+
 ### 2017-3-25
 #### v0.3.8
 * only cache when statusCode is 200
