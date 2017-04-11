@@ -242,6 +242,10 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-4-11
+#### v0.3.11
+* make cache files can be share to other developers
+
 ### 2017-3-31
 #### v0.3.10
 * print friendly error message when start server failed
