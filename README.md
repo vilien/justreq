@@ -242,9 +242,13 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-4-25
+#### v0.3.12
+* make sure that the CORS can be opened even though the configuration of api CORS is wrong
+
 ### 2017-4-11
 #### v0.3.11
-* make cache files can be share to other developers
+* make cache files can be shared to other developers
 
 ### 2017-3-31
 #### v0.3.10

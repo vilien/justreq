@@ -1,6 +1,6 @@
 {
   "name": "justreq",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "description": "Never offline test api server & mock server",
   "main": "index.js",
   "repository": {
