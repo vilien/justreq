@@ -2,6 +2,8 @@
 
 [![NPM version][npm-image]][npm-url] [![Downloads][downloads-image]][npm-url] [![License][license-image]][npm-url]
 
+[查看中文版](./README-cn.md)
+
 A caching proxy server for testing interface of HTTP or HTTPS. A never offline testing interface server. A mock server. It can help us to develop offline. It's especially useful for Front-End developers.
 
 ## Features
