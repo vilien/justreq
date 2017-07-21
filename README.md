@@ -244,6 +244,10 @@ Now, we can open any html files to experience.
 *********
 
 ## ChangeLog
+### 2017-7-21
+#### v0.3.14
+* fix exception when cache map is wrong
+
 ### 2017-4-25
 #### v0.3.12
 * make sure that the CORS can be opened even though the configuration of api CORS is wrong
