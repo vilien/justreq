@@ -245,6 +245,9 @@ Now, we can open any html files to experience.
 
 ## ChangeLog
 ### 2017-7-21
+#### v0.3.15
+* optimize cache map
+
 #### v0.3.14
 * fix exception when cache map is wrong
 

@@ -240,6 +240,9 @@ OK，一切准备就绪，现在可以打开任意html文件进行体验
 
 ## ChangeLog
 ### 2017-7-21
+#### v0.3.15
+* 优化cache map
+
 #### v0.3.14
 * 修复因cache map出错导致justreq不能启动的bug
 
