@@ -8,24 +8,24 @@
   "proxyTimeout": "6s",
   "rules": [
     {
-      "href" : "api/users.do",
-      "subs" : "jrs/users.jrs"
+      "url":  "api/users.do",
+      "subs": "jrs/users.jrs"
     },
     {
-      "href" : "api/save-user.do",
-      "subs" : "jrs/save-user.jrs"
+      "url":  "api/save-user.do",
+      "subs": "jrs/save-user.jrs"
     },
     {
-      "href" : "api/upload.do",
-      "subs" : "jrs/upload.jrs"
+      "url":  "api/upload.do",
+      "subs": "jrs/upload.jrs"
     },
     {
-      "href" : "api/post.do",
-      "subs" : "api/post.json"
+      "url":  "api/post.do",
+      "subs": "api/post.json"
     },
     {
-      "href" : "api/user.do",
-      "subs" : "api/user.json"
+      "url":  "api/user.do",
+      "subs": "api/user.json"
     }
   ]
 }

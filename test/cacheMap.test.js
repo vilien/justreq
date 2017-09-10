@@ -17,23 +17,23 @@ describe('CacheMap test', function(){
     defaultOptions = {
       'rules': [
         {
-          'href': 'user.do\\?id=(\\d+)',
+          'url': 'user.do\\?id=(\\d+)',
           'subs': 'user.jrs?userId=$1'
         },
         {
-          'href': 'config.do\\?id=(\\d+)',
+          'url': 'config.do\\?id=(\\d+)',
           'subs': 'config-$1.json'
         },
         {
-          'href': 'login.do',
+          'url': 'login.do',
           'noCache': true
         },
         {
-          'href': 'getGoodsInfo.do',
+          'url': 'getGoodsInfo.do',
           'ignoreArgs': 'v,token,timestamp'
         },
         {
-          'href': 'getOtherHost.do',
+          'url': 'getOtherHost.do',
           'host': '202.1.3.5',
           'port': 81,
           'keepFresh': true
@@ -46,31 +46,31 @@ describe('CacheMap test', function(){
   it('init() test', function(){
     let rule = [
       {
-        'href': 'user.do\\?id=(\\d+)',
+        'url': 'user.do\\?id=(\\d+)',
         'patt': /user.do\?id=(\d+)/,
         'subs': 'user.jrs?userId=$1',
         'isJrs': true
       },
       {
-        'href': 'config.do\\?id=(\\d+)',
+        'url': 'config.do\\?id=(\\d+)',
         'patt': /config.do\?id=(\d+)/,
         'subs': 'config-$1.json',
         'isJrs': false
       },
       {
-        'href': 'login.do',
+        'url': 'login.do',
         'patt': /login.do/,
         'noCache': true,
         'isJrs': false
       },
       {
-        'href': 'getGoodsInfo.do',
+        'url': 'getGoodsInfo.do',
         'patt': /getGoodsInfo.do/,
         'ignoreArgs': 'v,token,timestamp',
         'isJrs': false
       },
       {
-        'href': 'getOtherHost.do',
+        'url': 'getOtherHost.do',
         'patt': /getOtherHost.do/,
         'host': '202.1.3.5',
         'port': 81,

@@ -45,7 +45,11 @@ const API_HOST = "http://127.0.0.1:8000";
 $.get(API_HOST + "/getInfo.do?userId=1001", callback);
 ```
 
+Now, all ready, enjoy your coding.
+
 ******
+
+### Arguments of CLI
  
 Also, we can run this to clean caches and start JR server
 ```
@@ -109,7 +113,8 @@ For some special interface, we can rule it using:
 
 |    name    |  description  
 |------------|:-----------------------------------------------------
-| href       | The path of URL, not null. Support for RegExp.
+| url        | The URL of API, not null. Support for RegExp.
+| method     | The method of API, Optional. Do not filter any method on default.
 | ignoreArgs | Some fields can be ignored, such as version stamp "?v=1483884433384", we can using: `{"ignoreArgs" : "v"}`
 | noCache    | Not allow caching. Default is allowed.
 | subs       | Substitution's path. Suggest to use our ***jrs***, or "json", "txt" and so on.
@@ -125,25 +130,25 @@ Example:
     ...
   "rules": [
     { // for default, always try to proxy to keep fresh
-      "href": ".+",
-      "keepFresh": true
+      "url":        ".+",
+      "keepFresh":  true
     },
     { // using RegExp
-      "href":       "user.do\\?id=(\\d+)",
+      "url":        "user.do\\?id=(\\d+)",
       "subs":       "user.jrs?userId=$1"
     },
     {
-      "href":       "login.do",
+      "url":        "login.do",
       "noCache":    true
     },
     {
-      "href":       "getGoodsInfo.do",
+      "url":        "getGoodsInfo.do",
       "ignoreArgs": "v,token,timestamp"
     },
     { // all api that include 'system' in url will be proxy to another host
-      "href": "system.+",
-      "host": "192.168.1.188",
-      "port": "8080"
+      "url":        "system.+",
+      "host":       "192.168.1.188",
+      "port":       "8080"
     }
   ]
 }
@@ -242,130 +247,6 @@ Now, we can open any html files to experience.
 [jrs.html](examples/jrs.html), [substitutes.html](examples/substitutes.html), [upload.html](examples/upload.html)
 
 *********
-
-## ChangeLog
-### 2017-7-21
-#### v0.3.15
-* optimize cache map
-
-#### v0.3.14
-* fix exception when cache map is wrong
-
-### 2017-4-25
-#### v0.3.12
-* make sure that the CORS can be opened even though the configuration of api CORS is wrong
-
-### 2017-4-11
-#### v0.3.11
-* make cache files can be shared to other developers
-
-### 2017-3-31
-#### v0.3.10
-* print friendly error message when start server failed
-
-### 2017-3-25
-#### v0.3.8
-* only cache when statusCode is 200
-
-### 2017-3-22
-#### v0.3.7
-* support for response Binary use echo()
-
-### 2017-3-19
-#### v0.3.6
-* support for replace host and port in rules
-* support for keep latest response with cache
-
-### 2017-3-15
-#### v0.3.5
-* fix exception of not allow cache
-
-### 2017-3-2
-#### v0.3.4
-* modify "readme.md"
-
-#### v0.3.3
-* fix bug about run JR Server without inspector failed
-
-### 2017-3-1
-#### v0.3.2
-* add inspector to inspect http request customized
-* fix wrong reponse when read cache when failed proxy
-
-### 2017-2-28
-#### v0.3.1
-* refactor some files use ES6
-* fix bug about create new slow map fail
-* optimize proxy pipe
-* add some global property to JRScript
-* add 404 err to JR Server when can't find jrs file
-* fix wrong charaters which create by reduceFormData.js when length below 17
-
-### 2017-2-20
-#### v0.2.13
-* Removed character '^M' in some files
-
-### 2017-2-9
-#### v0.2.12
-* Fixed a exception that when submit a form which contain some checkbox
-
-### 2017-2-4
-#### v0.2.11
-* Support to add 'search' in subs of RULE
-
-#### v0.2.10
-* Support for RegExp replacement
-
-### 2017-1-19
-#### v0.2.9
-* Fixed a exception about proxy timeout
-
-### 2017-1-17
-#### v0.2.8
-* Optimized cleaning cache logic
-
-#### v0.2.7
-* Optimized processing logic of CORS
-* Normalized some code
-
-### 2017-1-15
-#### v0.2.6
-* Optimized log printing for substitutions
-* Modified some error description in README.md
-
-### 2017-1-13
-#### v0.2.5
-* Added english "README.md" and examples
-
-#### v0.2.4
-* Optimized log printing
-* Removed unusual dependencies
-
-### 2017-1-12
-#### v0.2.3
-* Fixed an exception about read substitution file
-
-#### v0.2.2
-* Added a demo about upload file of jrs
-* Packet less fixed
-
-### 2017-1-11
-#### v0.2.1
-* Refactored "server.js" using modules of HTTP and "pipe"
-* Refactored "proxy.js" using "pipe"
-* Refactored "jrs.js" using "formidable"
-* Support for HTTPS using HTTPS module
-* Added error page of HTTP status 400
-* Added configuration of CORS
-
-### 2017-1-9
-#### v0.1.3
-* A buf of set-cookie fixes.
-
-### 2017-1-8
-#### v0.1.2
-* Support for CORS
-* Finished examples
 
 ## More
 [justreq](https://github.com/vilien/justreq)  - github
