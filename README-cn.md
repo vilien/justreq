@@ -118,6 +118,7 @@ end();
 | keepFresh  | 总是请求最新数据，仅在接口服务器不可用时才使用缓存
 | host       | 临时替换host，相当于对单条规则转发
 | port       | 临时替换port
+| rewrite    | 重写url
 
 以下是一份样例：
 

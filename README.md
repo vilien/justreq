@@ -121,6 +121,7 @@ For some special interface, we can rule it using:
 | keepFresh  | Always use latest response, unless proxy failed.
 | host       | Temporarily replace host.
 | port       | Temporarily replace port.
+| rewrite    | The URL of be rewritten.
 
 Example:
 
